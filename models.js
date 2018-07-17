@@ -10,7 +10,7 @@ const blogPostSchema = mongoose.Schema({
   },
   title: {type: String, required: true},
   content: {type: String},
-  created: {type: Date, default: Date.now}
+  created: {type: Date, default: Date.now()}
 });
 
 
@@ -28,6 +28,6 @@ blogPostSchema.methods.serialize = function() {
   };
 };
 
-const BlogPost = mongoose.model('BlogPost', blogPostSchema);
+const BlogPost = mongoose.model('allPosts', blogPostSchema);
 
-module.exports = {BlogPost};
+module.exports = { BlogPost };

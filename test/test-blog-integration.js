@@ -32,17 +32,17 @@ function seedBlogPostData() {
 }
 
 // used to generate data to put in db
-function generateAuthorName() {
-  const author = [
-    'Joe Schmoe', 'John Doe', 'Jane Smith', 'Janice Dougherty', 'Jasper Island'];
-  return author[Math.floor(Math.random() * name.length)];
-}
+// function generateAuthorName() {
+//   const author = [
+//     'Joe Schmoe', 'John Doe', 'Jane Smith', 'Janice Dougherty', 'Jasper Island'];
+//   return author[Math.floor(Math.random() * name.length)];
+// }
 
 //used to generate title
-function generateTitle() {
-  const titles = ['some dumb article', 'Thai infrastructure', 'Colombian Bam Bam'];
-  return titles[Math.floor(Math.random() * titles.length)];
-}
+// function generateTitle() {
+//   const titles = ['some dumb article', 'Thai infrastructure', 'Colombian Bam Bam'];
+//   return titles[Math.floor(Math.random() * titles.length)];
+// }
 
 //used to generate content
 function generateContent(){
@@ -123,12 +123,13 @@ describe('BlogPost API resource', function() {
           // so subsequent .then blocks can access response object
           res = _res;
           expect(res).to.have.status(200);
+          console.log("testKC");
           // otherwise our db seeding didn't work
-          expect(res.body.BLOGTEST).to.have.lengthOf.at.least(1);
-          return BlogPost.count();
+          expect(res.body.posts).to.have.lengthOf.at.least(1);
+          return allPosts.count();
         })
         .then(function(count) {
-          expect(res.body.BlogPost).to.have.lengthOf(count);
+          expect(res.body.posts).to.have.lengthOf(count);
         });
     });
 
@@ -136,9 +137,9 @@ describe('BlogPost API resource', function() {
     it('should return restaurants with right fields', function() {
       // Strategy: Get back all restaurants, and ensure they have expected keys
 
-      let resRestaurant;
+      let resPosts;
       return chai.request(app)
-        .get('/restaurants')
+        .get('/posts')
         .then(function(res) {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
